@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3nupaf0mqq2f"]
 
-[ext_resource type="Script" path="res://rockpile.gd" id="1_ixije"]
-[ext_resource type="PackedScene" uid="uid://do5ciu7ykx32p" path="res://rock.tscn" id="1_jbstt"]
+[ext_resource type="Script" path="res://scripts/rockpile.gd" id="1_ixije"]
+[ext_resource type="PackedScene" uid="uid://do5ciu7ykx32p" path="res://scenes/rock.tscn" id="1_jbstt"]
 
 [node name="Rockpile" type="Node2D"]
+z_index = 5
 script = ExtResource("1_ixije")
 
 [node name="Rock" parent="." instance=ExtResource("1_jbstt")]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://bokk4rl37lv1t"]
+
+[ext_resource type="Script" path="res://scripts/board.gd" id="1_1u8pc"]
+[ext_resource type="PackedScene" uid="uid://c2v6rliyxr2fx" path="res://scenes/squarebig.tscn" id="2_8cufc"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/boardstatemachine.gd" id="3_wqgbh"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardidle.gd" id="4_ca7tb"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardsetup.gd" id="5_lvog4"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardpickuprocks.gd" id="6_crh73"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardputrocks.gd" id="6_ylfhq"]
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_1u8pc")
+
+[node name="SquareBig" parent="." instance=ExtResource("2_8cufc")]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("board")]
+script = ExtResource("3_wqgbh")
+board = NodePath("..")
+
+[node name="StateBoardIdle" type="Node" parent="StateMachine"]
+script = ExtResource("4_ca7tb")
+
+[node name="StateBoardSetup" type="Node" parent="StateMachine"]
+script = ExtResource("5_lvog4")
+
+[node name="StateBoardPickupRocks" type="Node" parent="StateMachine"]
+script = ExtResource("6_crh73")
+
+[node name="StateBoardPutRocks" type="Node" parent="StateMachine"]
+script = ExtResource("6_ylfhq")
