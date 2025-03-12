@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://birtrmdefmuj8"]
+[gd_scene load_steps=6 format=3 uid="uid://birtrmdefmuj8"]
 
 [ext_resource type="Script" path="res://scripts/square.gd" id="1_6kgwa"]
 [ext_resource type="Texture2D" uid="uid://etnhjl244sb6" path="res://assets/Square.png" id="2_5s413"]
 [ext_resource type="PackedScene" uid="uid://b3nupaf0mqq2f" path="res://scenes/rockpile.tscn" id="3_2vgq4"]
+[ext_resource type="Texture2D" uid="uid://dtri4omgbjqd8" path="res://assets/DisableSquare.png" id="4_cvkok"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubuqt"]
 size = Vector2(16, 16)
@@ -25,3 +26,8 @@ texture = ExtResource("2_5s413")
 [node name="Rockpile" parent="." instance=ExtResource("3_2vgq4")]
 position = Vector2(4.4, 5.4)
 scale = Vector2(0.167, 0.167)
+
+[node name="DisableSquare" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(8, 8)
+texture = ExtResource("4_cvkok")

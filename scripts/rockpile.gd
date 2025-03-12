@@ -4,6 +4,7 @@ const RockSize: int = 16
 const RockScene: PackedScene = preload("res://scenes/rock.tscn")
 var picked_up: bool = false
 var container_size: Vector2
+var max_rocks_in_row: int
 var _position_when_picked_up: Vector2 = Vector2.ZERO
 var _rocks: Array[Node2D]
 
@@ -15,6 +16,7 @@ func _ready() -> void:
 
 func set_container_size(size: Vector2) -> void:
 	container_size = size - Vector2(30, 30)
+	max_rocks_in_row = container_size.x / RockSize
 	
 func is_empty() -> bool:
 	return rocks_count() <= 0
@@ -35,13 +37,16 @@ func put_down() -> void:
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 
+func remove_rock(amount : int) -> void:
+	for i in amount:
+		var rock = _rocks.pop_back()
+		rock.queue_free()
+
 func add_rock(amount : int) -> void:
+	print("Add rock: ", amount)
 	var rock = RockScene.instantiate() as Node2D
-	if (not _rocks.is_empty()):
-		var new_position = rock.position
-		new_position.x = _rocks.back().position.x + RockSize
-		rock.position = _clamp_position_to_container(new_position)
 	_add_rock_to_scene(rock)
+	_set_rock_position(rock, _rocks.find(rock))
 
 func set_rocks(amount : int) -> void:
 	_rocks.clear()
@@ -49,16 +54,12 @@ func set_rocks(amount : int) -> void:
 		child.queue_free()
 	for i in amount:
 		var rock = RockScene.instantiate() as Node2D
-		var new_position = rock.position
-		new_position.x = i*RockSize
-		rock.position = _clamp_position_to_container(new_position)
 		_add_rock_to_scene(rock)
+		_set_rock_position(rock, i)
 		
-func _clamp_position_to_container(position: Vector2):
-	if (position.x >= container_size.x):
-		position.x = 0
-		position.y = RockSize
-	return position
+func _set_rock_position(rock: Node2D, index: int) -> void:
+	rock.position.x = (index % max_rocks_in_row) * RockSize
+	rock.position.y = (index / max_rocks_in_row) * RockSize
 		
 func _add_rock_to_scene(rock: Node2D):
 	add_child(rock)
