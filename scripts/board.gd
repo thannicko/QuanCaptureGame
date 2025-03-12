@@ -21,6 +21,9 @@ func _spawn_board():
 
 func _spawn_big_square(is_last_square: bool) -> void:
 	var big_square = BigSquareScene.instantiate() as BigSquare
+	big_square.name = "BigSquare"
+	if (is_last_square):
+		big_square.name = "LastBigSquare"
 	add_child(big_square)
 	squares.append(big_square)
 	if (is_last_square):
@@ -37,5 +40,6 @@ func _spawn_row(row_index : int, backward: bool) -> void:
 		else:
 			square.position.x = (i + 1) * SquareSize.x * square.scale.x
 		square.position.y = row_index * SquareSize.y * square.scale.y
+		square.name = "Square" + str(i) + "Row" + str(row_index)
 		add_child(square)
 		squares.append(square)

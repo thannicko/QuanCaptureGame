@@ -12,7 +12,6 @@ func on_square_clicked(square: Square) -> void:
 		if (not square.rock_pile.is_empty()):
 			square.rock_pile.pick_up()
 			statemachine.selected_square = square
-			_disable_unreachable_squares()
 		else:
 			print("Square empty!")
 	else:

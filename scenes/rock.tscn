@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://do5ciu7ykx32p"]
+[gd_scene load_steps=6 format=3 uid="uid://do5ciu7ykx32p"]
 
-[ext_resource type="Texture2D" uid="uid://cki8tfuatuxuw" path="res://assets/Rock.png" id="1_b4wti"]
+[ext_resource type="Texture2D" uid="uid://bgy0mki3gxrol" path="res://assets/RockWithOutline.png" id="1_0auhv"]
+[ext_resource type="Script" path="res://scenes/rock.gd" id="1_7w73s"]
+[ext_resource type="Texture2D" uid="uid://b2m20d26quw1c" path="res://assets/BlueRock.png" id="3_ibmlo"]
+[ext_resource type="Texture2D" uid="uid://dyo707p4ci5p7" path="res://assets/BlackRock.png" id="4_udb54"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l2bjr"]
 radius = 8.06226
 
 [node name="Rock" type="Node2D"]
+script = ExtResource("1_7w73s")
+rock_textures = Array[Texture2D]([ExtResource("1_0auhv"), ExtResource("3_ibmlo"), ExtResource("4_udb54")])
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -14,4 +19,4 @@ shape = SubResource("CircleShape2D_l2bjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_b4wti")
+texture = ExtResource("1_0auhv")
