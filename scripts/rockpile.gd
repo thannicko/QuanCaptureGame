@@ -46,6 +46,11 @@ func add_rock(rock : Node2D) -> void:
 	_rocks.append(rock)
 	_set_rock_position(rock, _rocks.find(rock))
 
+func clear() -> void:
+	_rocks.clear()
+	for child in get_children():
+		child.queue_free()
+
 func set_rocks(amount : int) -> void:
 	_set_rocks(RockScene, amount)
 
@@ -53,9 +58,7 @@ func set_big_rocks(amount : int) -> void:
 	_set_rocks(BigRockScene, amount)
 
 func _set_rocks(scene: PackedScene, amount : int) -> void:
-	_rocks.clear()
-	for child in get_children():
-		child.queue_free()
+	clear()
 	for i in amount:
 		var rock = scene.instantiate() as Node2D
 		_add_rock_to_scene(rock)

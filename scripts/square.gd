@@ -18,6 +18,9 @@ func _ready() -> void:
 func is_empty() -> bool:
 	return rock_pile.rocks_count() <= 0
 
+func eat() -> void:
+	rock_pile.clear()
+	
 func get_size() -> Vector2:
 	return 16 * scale
 

@@ -9,6 +9,8 @@ func entry() -> void:
 		next_square.rock_pile.pick_up()
 		statemachine.selected_square = next_square
 		statemachine.first_dropoff_square = square_after_next
+		if (statemachine.selected_square is BigSquare):
+			statemachine.toggle_put_direction()
 		statemachine.change_to_state("StateBoardPutRocks")
 	else:
 		if (next_square.is_empty() and not square_after_next.is_empty()):

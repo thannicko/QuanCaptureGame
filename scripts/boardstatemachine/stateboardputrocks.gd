@@ -40,7 +40,8 @@ func _drop_rock_at(destination: Square) -> void:
 		destination.rock_pile.add_rock(rock)
 		destination.disable()
 		_square_path.erase(destination)
-		print("Rock dropped, path: ", _square_path)
+		print("Count: ", statemachine.selected_square.rock_pile.rocks_count(),
+			"Rock dropped, path: ", _square_path)
 	if (destination is BigSquare):
 		statemachine.toggle_put_direction()
 		print("Toggled direction, now is: ", statemachine.put_direction)

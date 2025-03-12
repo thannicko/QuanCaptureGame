@@ -2,6 +2,8 @@ class_name StateBoardPickupRocks extends State
 
 func entry() -> void:
 	print("Entered: ", name)
+	statemachine.selected_square = null
+	statemachine.first_dropoff_square = null
 	for square_node in statemachine.board.squares:
 		var square = square_node as Square
 		square.square_clicked.connect(on_square_clicked.bind(square))
