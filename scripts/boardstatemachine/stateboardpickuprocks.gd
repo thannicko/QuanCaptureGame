@@ -12,6 +12,7 @@ func on_square_clicked(square: Square) -> void:
 		if (not square.rock_pile.is_empty()):
 			square.rock_pile.pick_up()
 			statemachine.selected_square = square
+			_disable_unreachable_squares()
 		else:
 			print("Square empty!")
 	else:
@@ -21,6 +22,20 @@ func on_square_clicked(square: Square) -> void:
 		else:
 			statemachine.first_dropoff_square = square
 			statemachine.change_to_state("StateBoardPutRocks")
+
+func _disable_unreachable_squares() -> void:
+	var reachable_indices: Array[int]  = []
+	var selected_index = statemachine.board.squares.find(statemachine.selected_square)
+	for i in statemachine.selected_square.rock_pile.rocks_count():
+		var indice = 0
+		if (statemachine.put_direction == BoardStateMachine.PutRocksDirection.Left):
+			indice = (selected_index + i + 1) % statemachine.board.squares.size()
+		else:
+			indice = (selected_index - i - 1) % statemachine.board.squares.size()
+		reachable_indices.append(indice)
+	for i in statemachine.board.squares.size():
+		if i not in reachable_indices:
+			statemachine.board.squares[i].disable()
 
 func exit() -> void:
 	for square_node in statemachine.board.squares:

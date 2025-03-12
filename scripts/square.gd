@@ -16,10 +16,14 @@ func _ready() -> void:
 	disabled_square.hide()
 
 func disable() -> void:
-	print(name, " disable")
 	disabled = true
 	disabled_square.show()
 	set_process_input(false)
+
+func enable() -> void:
+	disabled = false
+	disabled_square.hide()
+	set_process_input(true)
 
 func _input(event: InputEvent) -> void:
 	if (_is_mouse_on_square and event is InputEventMouseButton and event.is_pressed()):

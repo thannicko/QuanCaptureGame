@@ -15,9 +15,9 @@ func _spawn_board():
 	for child in get_children().filter(func(child): return child is Square):
 		child.queue_free()
 	_spawn_big_square(false)
-	_spawn_row(0)
-	_spawn_row(1)
+	_spawn_row(0, false)
 	_spawn_big_square(true)
+	_spawn_row(1, true)
 
 func _spawn_big_square(is_last_square: bool) -> void:
 	var big_square = BigSquareScene.instantiate() as BigSquare
@@ -29,10 +29,13 @@ func _spawn_big_square(is_last_square: bool) -> void:
 	else:
 		big_square.face_right()
 
-func _spawn_row(row_index : int) -> void:
+func _spawn_row(row_index : int, backward: bool) -> void:
 	for i in NumberOfPlayerSquares:
 		var square = SquareScene.instantiate() as Square
-		square.position.x = (i + 1) * SquareSize.x * square.scale.x
+		if backward:
+			square.position.x = (NumberOfPlayerSquares - i) * SquareSize.x * square.scale.x
+		else:
+			square.position.x = (i + 1) * SquareSize.x * square.scale.x
 		square.position.y = row_index * SquareSize.y * square.scale.y
 		add_child(square)
 		squares.append(square)
