@@ -1,12 +1,21 @@
 class_name RockPile extends Node2D
 
 var RockScene: PackedScene = preload("res://rock.tscn")
+var picked_up: bool = false
+var _position_when_picked_up: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	set_process(false)
 
 func pick_up():
-	set_process(true)
+	_position_when_picked_up = position
+	picked_up = true
+	set_process(picked_up)
+
+func put_down():
+	position = _position_when_picked_up
+	picked_up = false
+	set_process(false)
 
 func spawn_rocks(number : int) -> void:
 	for child in get_children():

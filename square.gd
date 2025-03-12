@@ -12,7 +12,10 @@ func _input(event: InputEvent) -> void:
 	if (_is_mouse_on_square and event is InputEventMouseButton and event.is_pressed()):
 		print("Pressed square: ", name)
 		if (rock_pile != null):
-			rock_pile.pick_up()
+			if (not rock_pile.picked_up):
+				rock_pile.pick_up()
+			else:
+				rock_pile.put_down()
 
 func _on_mouse_entered_square():
 	_is_mouse_on_square = true;
