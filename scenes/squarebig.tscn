@@ -48,6 +48,5 @@ texture = ExtResource("3_o7wp7")
 flip_v = true
 
 [node name="Rockpile" parent="." instance=ExtResource("3_g1rkm")]
-position = Vector2(4, 20)
-rotation = -1.5708
+position = Vector2(5.2, 13.4)
 scale = Vector2(0.167, 0.167)

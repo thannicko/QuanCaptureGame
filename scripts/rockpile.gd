@@ -2,6 +2,7 @@ class_name RockPile extends Node2D
 
 const RockSize: int = 16
 const RockScene: PackedScene = preload("res://scenes/rock.tscn")
+const BigRockScene: PackedScene = preload("res://scenes/bigrock.tscn")
 var picked_up: bool = false
 var container_size: Vector2
 var max_rocks_in_row: int
@@ -46,11 +47,17 @@ func add_rock(rock : Node2D) -> void:
 	_set_rock_position(rock, _rocks.find(rock))
 
 func set_rocks(amount : int) -> void:
+	_set_rocks(RockScene, amount)
+
+func set_big_rocks(amount : int) -> void:
+	_set_rocks(BigRockScene, amount)
+
+func _set_rocks(scene: PackedScene, amount : int) -> void:
 	_rocks.clear()
 	for child in get_children():
 		child.queue_free()
 	for i in amount:
-		var rock = RockScene.instantiate() as Node2D
+		var rock = scene.instantiate() as Node2D
 		_add_rock_to_scene(rock)
 		_set_rock_position(rock, i)
 		

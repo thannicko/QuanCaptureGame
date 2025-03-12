@@ -11,6 +11,7 @@ var empty_square_to_tap: Square
 var eaten_square: Square
 var put_direction: PutRocksDirection
 
+const NumberOfStartingRocksBigSquare : int = 1
 const NumberOfStartingRocks : int = 5
 
 func toggle_put_direction() -> void:
