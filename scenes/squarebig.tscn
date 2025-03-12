@@ -30,8 +30,8 @@ texture = ExtResource("2_5hc2s")
 [node name="Sprite2D2" type="Sprite2D" parent="Sprite"]
 texture_filter = 1
 position = Vector2(0, 8)
-rotation = -1.5708
 texture = ExtResource("2_5hc2s")
+flip_v = true
 
 [node name="DisableSquare" type="Node2D" parent="."]
 position = Vector2(8, 16)
@@ -44,8 +44,8 @@ texture = ExtResource("3_o7wp7")
 [node name="Sprite2D2" type="Sprite2D" parent="DisableSquare"]
 texture_filter = 1
 position = Vector2(0, 8)
-rotation = -1.5708
 texture = ExtResource("3_o7wp7")
+flip_v = true
 
 [node name="Rockpile" parent="." instance=ExtResource("3_g1rkm")]
 position = Vector2(4, 20)
