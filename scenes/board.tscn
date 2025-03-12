@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bokk4rl37lv1t"]
+[gd_scene load_steps=10 format=3 uid="uid://bokk4rl37lv1t"]
 
 [ext_resource type="Script" path="res://scripts/board.gd" id="1_1u8pc"]
 [ext_resource type="PackedScene" uid="uid://c2v6rliyxr2fx" path="res://scenes/squarebig.tscn" id="2_8cufc"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardsetup.gd" id="5_lvog4"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardpickuprocks.gd" id="6_crh73"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardputrocks.gd" id="6_ylfhq"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardcheckturnend.gd" id="8_if1vu"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardeatsquare.gd" id="9_j1vey"]
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_1u8pc")
@@ -28,3 +30,9 @@ script = ExtResource("6_crh73")
 
 [node name="StateBoardPutRocks" type="Node" parent="StateMachine"]
 script = ExtResource("6_ylfhq")
+
+[node name="StateBoardCheckTurnEnd" type="Node" parent="StateMachine"]
+script = ExtResource("8_if1vu")
+
+[node name="StateBoardEatSquare" type="Node" parent="StateMachine"]
+script = ExtResource("9_j1vey")

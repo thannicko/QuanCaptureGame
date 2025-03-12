@@ -12,8 +12,14 @@ var disabled : bool = false
 func _ready() -> void:
 	area2d.mouse_entered.connect(_on_mouse_entered_square)
 	area2d.mouse_exited.connect(_on_mouse_exited_square)
-	rock_pile.set_container_size(16 * scale)
+	rock_pile.set_container_size(get_size())
 	disabled_square.hide()
+
+func is_empty() -> bool:
+	return rock_pile.rocks_count() <= 0
+
+func get_size() -> Vector2:
+	return 16 * scale
 
 func disable() -> void:
 	disabled = true

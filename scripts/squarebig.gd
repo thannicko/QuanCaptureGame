@@ -7,9 +7,8 @@ const LeftFacingSecondHalfRotation : int = 180
 const RightFacingFirstHalfRotation : int = 0
 const RightFacingSecondHalfRotation : int = -90
 
-func _ready() -> void:
-	super._ready()
-	rock_pile.set_container_size(Vector2(16 * scale.x, 32 * scale.y))
+func get_size() -> Vector2:
+	return Vector2(16 * scale.x, 32 * scale.y)
 
 func _input(event: InputEvent) -> void:
 	super._input(event)

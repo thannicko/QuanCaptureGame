@@ -5,7 +5,7 @@ func entry() -> void:
 	for square_node in statemachine.board.squares:
 		var square = square_node as Square
 		square.square_clicked.connect(on_square_clicked.bind(square))
-		square.set_process_input(true)
+		square.enable()
 		
 func on_square_clicked(square: Square) -> void:
 	if (statemachine.selected_square == null):
@@ -18,9 +18,11 @@ func on_square_clicked(square: Square) -> void:
 		if (square == statemachine.selected_square):
 			square.rock_pile.put_down()
 			statemachine.selected_square = null
-		else:
+		elif (abs(square.position.x - statemachine.selected_square.position.x) == square.get_size().x):
 			statemachine.first_dropoff_square = square
 			statemachine.change_to_state("StateBoardPutRocks")
+		else:
+			print("Too far away")
 
 func _disable_unreachable_squares() -> void:
 	var reachable_indices: Array[int]  = []
@@ -36,7 +38,14 @@ func _disable_unreachable_squares() -> void:
 		if i not in reachable_indices:
 			statemachine.board.squares[i].disable()
 
+func _determine_selected_direction() -> void:
+	statemachine.put_direction = statemachine.determine_direction(
+		statemachine.selected_square, # from
+		statemachine.first_dropoff_square # to
+	)
+
 func exit() -> void:
+	_determine_selected_direction()
 	for square_node in statemachine.board.squares:
 		var square = square_node as Square
 		square.square_clicked.disconnect(on_square_clicked)

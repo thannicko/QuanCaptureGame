@@ -1,5 +1,7 @@
 class_name Board extends Node2D
 
+signal square_eaten(square: Square)
+
 const NumberOfSquares : int  = 12
 const NumberOfPlayerSquares : int  = 5
 const SquareSize: Vector2 = Vector2(16, 16)
