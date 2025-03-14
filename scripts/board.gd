@@ -1,6 +1,8 @@
 class_name Board extends Node2D
 
-signal square_eaten(square: Square)
+signal square_eaten(player_index: int, square: Square)
+signal turn_started(player_index: int)
+signal turn_ended()
 
 const NumberOfSquares : int  = 12
 const NumberOfPlayerSquares : int  = 5
@@ -11,6 +13,18 @@ var squares: Array[Square]
 
 func _ready() -> void:
 	_spawn_board()
+	
+func start_turn(player_index : int) -> void:
+	print("Start turn wiht index: ", player_index)
+	turn_started.emit(player_index)
+
+func get_row_index(square: Square) -> int:
+	var index = squares.find(square)
+	if (index >= 1 and index <= NumberOfPlayerSquares):
+		return 0
+	elif (index > NumberOfPlayerSquares + 1 and index < NumberOfSquares):
+		return 1
+	return -1
 
 func _spawn_board():
 	squares.clear()

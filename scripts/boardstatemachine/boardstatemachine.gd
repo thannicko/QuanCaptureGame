@@ -4,6 +4,7 @@ class_name BoardStateMachine extends StateMachine
 
 enum PutRocksDirection { Clockwise, Anticlockwise }
 
+var allowed_row_index: int
 var selected_square: Square
 var first_dropoff_square: Square
 var last_dropoff_square: Square

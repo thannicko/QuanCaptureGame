@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=4 uid="uid://dqmfeshh1gjkn"]
+[gd_scene load_steps=13 format=4 uid="uid://dqmfeshh1gjkn"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_xemcm"]
 [ext_resource type="PackedScene" uid="uid://b3nupaf0mqq2f" path="res://scenes/rockpile.tscn" id="2_pxo3o"]
 [ext_resource type="PackedScene" uid="uid://bokk4rl37lv1t" path="res://scenes/board.tscn" id="3_jje64"]
 [ext_resource type="Texture2D" uid="uid://cfe6x88arsw4j" path="res://assets/BackgroundTile.png" id="3_scyab"]
-[ext_resource type="Script" path="res://scripts/player_rock_pile.gd" id="4_55c4l"]
+[ext_resource type="Script" path="res://scripts/playerrockpile.gd" id="4_mb1lo"]
 [ext_resource type="FontFile" uid="uid://b0w2x2tmaaesu" path="res://assets/monogram.ttf" id="6_7svse"]
+[ext_resource type="Script" path="res://scripts/turnstatemachine/turnstatemachine.gd" id="7_dv7pw"]
+[ext_resource type="Script" path="res://scripts/turnstatemachine/stateturncheckplayer.gd" id="8_8a13q"]
+[ext_resource type="Script" path="res://scripts/turnstatemachine/stateturnplayer.gd" id="8_krinu"]
+[ext_resource type="Script" path="res://scripts/turnstatemachine/stateturnnpc.gd" id="10_qe6hr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7bbiu"]
 texture = ExtResource("3_scyab")
@@ -25,8 +29,9 @@ tile_set = SubResource("TileSet_6hsio")
 position = Vector2(320, 224)
 
 [node name="PlayerRockPile" type="Node" parent="." node_paths=PackedStringArray("board")]
-script = ExtResource("4_55c4l")
+script = ExtResource("4_mb1lo")
 board = NodePath("../Board")
+player_index = 1
 
 [node name="RockPile" parent="PlayerRockPile" instance=ExtResource("2_pxo3o")]
 position = Vector2(560, 448)
@@ -41,3 +46,36 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_7svse")
 theme_override_font_sizes/font_size = 24
 text = "Count: 0"
+
+[node name="OtherRockPile" type="Node" parent="." node_paths=PackedStringArray("board")]
+script = ExtResource("4_mb1lo")
+board = NodePath("../Board")
+player_index = 0
+
+[node name="RockPile" parent="OtherRockPile" instance=ExtResource("2_pxo3o")]
+position = Vector2(608, 168)
+rotation = 3.14159
+
+[node name="Label" type="Label" parent="OtherRockPile"]
+texture_filter = 1
+offset_left = 808.0
+offset_top = 192.0
+offset_right = 880.0
+offset_bottom = 215.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_7svse")
+theme_override_font_sizes/font_size = 24
+text = "Count: 0"
+
+[node name="TurnStateMachine" type="Node" parent="." node_paths=PackedStringArray("board")]
+script = ExtResource("7_dv7pw")
+board = NodePath("../Board")
+
+[node name="StateTurnCheckPlayer" type="Node" parent="TurnStateMachine"]
+script = ExtResource("8_8a13q")
+
+[node name="StateTurnPlayer" type="Node" parent="TurnStateMachine"]
+script = ExtResource("8_krinu")
+
+[node name="StateTurnNpc" type="Node" parent="TurnStateMachine"]
+script = ExtResource("10_qe6hr")

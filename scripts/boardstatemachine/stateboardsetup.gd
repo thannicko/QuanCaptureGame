@@ -9,10 +9,11 @@ func entry() -> void:
 			square.rock_pile.set_big_rocks(statemachine.NumberOfStartingRocksBigSquare)
 		else:
 			square.rock_pile.set_rocks(statemachine.NumberOfStartingRocks)
-	#TODO: Determine the first player here
+	statemachine.board.turn_started.connect(on_turn_started)
+	
+func on_turn_started(player_index : int) -> void:
+	statemachine.allowed_row_index = player_index
 	statemachine.change_to_state("StateBoardPickupRocks")
 
-
-
 func exit() -> void:
-	pass
+	statemachine.board.turn_started.disconnect(on_turn_started)

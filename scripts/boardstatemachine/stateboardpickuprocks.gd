@@ -13,6 +13,8 @@ func on_square_clicked(square: Square) -> void:
 	if (statemachine.selected_square == null):
 		if (square is BigSquare):
 			print("Only allowed to pick up player squares!")
+		elif (statemachine.board.get_row_index(square) != statemachine.allowed_row_index):
+			print("Only allowed to pick up from your own squares!")
 		elif (not square.rock_pile.is_empty()):
 			square.rock_pile.pick_up()
 			statemachine.selected_square = square

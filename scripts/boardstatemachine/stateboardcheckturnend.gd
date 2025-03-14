@@ -18,7 +18,13 @@ func entry() -> void:
 			statemachine.empty_square_to_tap = next_square
 			statemachine.change_to_state("StateBoardEatSquare")
 		else:
-			statemachine.change_to_state("StateBoardPickupRocks")
+			statemachine.board.turn_started.connect(on_turn_started)
+			statemachine.board.turn_ended.emit()
+	
+func on_turn_started(player_index : int) -> void:
+	statemachine.allowed_row_index = player_index
+	statemachine.change_to_state("StateBoardPickupRocks")
 
 func exit() -> void:
-	pass
+	if (statemachine.board.turn_started.is_connected(on_turn_started)):
+		statemachine.board.turn_started.disconnect(on_turn_started)
