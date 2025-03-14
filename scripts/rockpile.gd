@@ -13,7 +13,6 @@ func _ready() -> void:
 	_rocks.clear()
 	for child in get_children():
 		child.queue_free()
-	set_process(false)
 
 func set_container_size(size: Vector2) -> void:
 	container_size = size - Vector2(30, 30)
@@ -28,20 +27,20 @@ func rocks_count() -> int:
 func pick_up() -> void:
 	_position_when_picked_up = position
 	picked_up = true
-	set_process(picked_up)
 
 func put_down() -> void:
 	position = _position_when_picked_up
 	picked_up = false
-	set_process(false)
 
 func _process(delta: float) -> void:
-	global_position = get_global_mouse_position()
+	if picked_up:
+		global_position = get_global_mouse_position()
 
 func pop_front() -> Node2D:
 	return _rocks.pop_front()
 
 func add_rock(rock : Node2D) -> void:
+	picked_up = false
 	rock.reparent(self)
 	_rocks.append(rock)
 	_set_rock_position(rock, _rocks.find(rock))

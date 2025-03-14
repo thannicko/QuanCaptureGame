@@ -1,6 +1,7 @@
 class_name StateBoardCheckTurnEnd extends State
 
 func entry() -> void:
+	print("Entered: check turn end")
 	var next_square : Square = statemachine.get_next_square(
 		statemachine.last_dropoff_square)
 	var square_after_next : Square = statemachine.get_next_square(

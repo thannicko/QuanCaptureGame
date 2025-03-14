@@ -21,7 +21,7 @@ func get_next_square(target: Square) -> Square:
 	return next_square
 
 func determine_direction(from : Square, to: Square) -> PutRocksDirection:
-	var diff = from.position.x - to.position.x;
+	var diff = from.position.x - to.position.x
 	var is_square_on_second_row = board.squares.find(from) > board.NumberOfPlayerSquares
 	is_square_on_second_row = is_square_on_second_row or board.squares.find(from) == 0
 	if (is_square_on_second_row):

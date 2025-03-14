@@ -27,8 +27,9 @@ func _disable_unreachable_squares() -> void:
 func on_square_clicked(square: Square) -> void:
 	if square == _square_path.front():
 		_drop_rock_at(square)
+
+func _check_path_empty() -> void:
 	if _square_path.is_empty():
-		statemachine.last_dropoff_square = square
 		statemachine.change_to_state("StateBoardCheckTurnEnd")
 
 func _drop_rock_at(destination: Square) -> void:
@@ -37,8 +38,8 @@ func _drop_rock_at(destination: Square) -> void:
 		destination.rock_pile.add_rock(rock)
 		destination.disable()
 		_square_path.erase(destination)
-		print("Count: ", statemachine.selected_square.rock_pile.rocks_count(),
-			"Rock dropped, path: ", _square_path)
+		statemachine.last_dropoff_square = destination
+		_check_path_empty()
 
 func exit() -> void:
 	for square_node in statemachine.board.squares:

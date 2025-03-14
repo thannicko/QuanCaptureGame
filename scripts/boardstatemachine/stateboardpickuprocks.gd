@@ -21,7 +21,9 @@ func on_square_clicked(square: Square) -> void:
 			square.rock_pile.put_down()
 			statemachine.selected_square = null
 		elif (abs(square.position.x - statemachine.selected_square.position.x) == square.get_size().x):
+			print("First dropoff square: ", square.name)
 			statemachine.first_dropoff_square = square
+			_determine_selected_direction()
 			statemachine.change_to_state("StateBoardPutRocks")
 		else:
 			print("Too far away")
@@ -33,7 +35,7 @@ func _determine_selected_direction() -> void:
 	)
 
 func exit() -> void:
-	_determine_selected_direction()
+	print("Exiting: selected square, ", statemachine.selected_square)
 	for square_node in statemachine.board.squares:
 		var square = square_node as Square
 		square.square_clicked.disconnect(on_square_clicked)
