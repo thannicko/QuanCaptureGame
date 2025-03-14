@@ -19,7 +19,17 @@ func _spawn_board():
 	_spawn_big_square(false)
 	_spawn_row(0, false)
 	_spawn_big_square(true)
-	_spawn_row(1, true)
+	_spawn_row(1, true) # Spawn backwards so we have increasing index clockwise
+	_assign_neighbors_to_square()
+
+func _assign_neighbors_to_square() -> void:
+	squares[0].anticlockwise_neighbor = squares.back()
+	squares[0].clockwise_neighbor = squares[1]
+	for i in range(1, NumberOfSquares - 1):
+		squares[i].anticlockwise_neighbor = squares[i - 1]
+		squares[i].clockwise_neighbor = squares[i + 1]
+	squares[NumberOfSquares - 1].anticlockwise_neighbor = squares[NumberOfSquares - 2]
+	squares[NumberOfSquares - 1].clockwise_neighbor = squares[0]
 
 func _spawn_big_square(is_last_square: bool) -> void:
 	var big_square = BigSquareScene.instantiate() as BigSquare

@@ -2,15 +2,13 @@ class_name StateBoardCheckTurnEnd extends State
 
 func entry() -> void:
 	var next_square : Square = statemachine.get_next_square(
-		statemachine.last_dropoff_square, statemachine.put_direction)
+		statemachine.last_dropoff_square)
 	var square_after_next : Square = statemachine.get_next_square(
-		next_square, statemachine.put_direction)
+		next_square)
 	if (next_square.rock_pile.rocks_count() > 0):
 		next_square.rock_pile.pick_up()
 		statemachine.selected_square = next_square
 		statemachine.first_dropoff_square = square_after_next
-		if (statemachine.selected_square is BigSquare):
-			statemachine.toggle_put_direction()
 		statemachine.change_to_state("StateBoardPutRocks")
 	else:
 		if (next_square.is_empty() and not square_after_next.is_empty()):
@@ -18,7 +16,7 @@ func entry() -> void:
 			statemachine.empty_square_to_tap = next_square
 			statemachine.change_to_state("StateBoardEatSquare")
 		else:
-			print("End turn")
+			statemachine.change_to_state("StateBoardPickupRocks")
 
 func exit() -> void:
 	pass

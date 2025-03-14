@@ -13,7 +13,7 @@ func on_square_eaten() -> void:
 	statemachine.eaten_square.eat()
 	statemachine.board.square_eaten.emit(statemachine.eaten_square)
 	statemachine.change_to_state("StateBoardPickupRocks")
-	print("Square eatean: ", statemachine.eaten_square)
+	print("Square eaten: ", statemachine.eaten_square)
 
 func exit() -> void:
 	pass

@@ -6,8 +6,11 @@ signal square_clicked
 @onready var rock_pile: RockPile = $"Rockpile"
 @onready var disabled_square: Node2D = $"DisableSquare"
 
-var _is_mouse_on_square: bool = false
 var disabled : bool = false
+var clockwise_neighbor: Square = null
+var anticlockwise_neighbor: Square = null
+
+var _is_mouse_on_square: bool = false
 
 func _ready() -> void:
 	area2d.mouse_entered.connect(_on_mouse_entered_square)

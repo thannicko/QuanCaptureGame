@@ -2,7 +2,7 @@ class_name BoardStateMachine extends StateMachine
 
 @export var board: Board
 
-enum PutRocksDirection { Left, Right }
+enum PutRocksDirection { Clockwise, Anticlockwise }
 
 var selected_square: Square
 var first_dropoff_square: Square
@@ -14,45 +14,19 @@ var put_direction: PutRocksDirection
 const NumberOfStartingRocksBigSquare : int = 1
 const NumberOfStartingRocks : int = 5
 
-func toggle_put_direction() -> void:
-	put_direction = get_toggled_direction(put_direction)
-
-func get_toggled_direction(input: PutRocksDirection) -> PutRocksDirection:
-	if (input == PutRocksDirection.Left):
-		return BoardStateMachine.PutRocksDirection.Right
-	else:
-		return BoardStateMachine.PutRocksDirection.Left
-
-func get_next_square(square: Square, direction: PutRocksDirection) -> Square:
-	if (direction == PutRocksDirection.Left):
-		return get_left_square_from(square)
-	return get_right_square_from(square)
-
-func get_right_square_from(square: Square) -> Square:
-	var index = board.squares.find(square)
-	if (index < board.squares.size() / 2):
-		# First row
-		var next_index =  (index + 1) % board.squares.size()
-		return board.squares[next_index]
-	else:
-		# Second row
-		var next_index = (index - 1) % board.squares.size()
-		return board.squares[next_index]
-
-func get_left_square_from(square: Square) -> Square:
-	var index = board.squares.find(square)
-	if (index < board.squares.size() / 2):
-		# First row
-		var next_index =  (index - 1) % board.squares.size()
-		return board.squares[next_index]
-	else:
-		# Second row
-		var next_index = (index + 1) % board.squares.size()
-		return board.squares[next_index]
+func get_next_square(target: Square) -> Square:
+	var next_square = target.anticlockwise_neighbor
+	if (put_direction == BoardStateMachine.PutRocksDirection.Clockwise):
+		next_square = target.clockwise_neighbor
+	return next_square
 
 func determine_direction(from : Square, to: Square) -> PutRocksDirection:
-	var diff = from.position.x - to.position.x
+	var diff = from.position.x - to.position.x;
+	var is_square_on_second_row = board.squares.find(from) > board.NumberOfPlayerSquares
+	is_square_on_second_row = is_square_on_second_row or board.squares.find(from) == 0
+	if (is_square_on_second_row):
+		diff *= -1; # Second row flips around left/right
 	if (diff > 0):
-		return BoardStateMachine.PutRocksDirection.Left
+		return BoardStateMachine.PutRocksDirection.Anticlockwise
 	else:
-		return BoardStateMachine.PutRocksDirection.Right
+		return BoardStateMachine.PutRocksDirection.Clockwise
