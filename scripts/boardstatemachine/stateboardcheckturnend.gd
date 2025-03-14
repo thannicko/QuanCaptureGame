@@ -8,24 +8,30 @@ func entry() -> void:
 		continue_game()
 
 func continue_game() -> void:
-	var has_not_eaten = statemachine.previous_state.name != "StateBoardEatSquare"
+	var is_eating_square = statemachine.previous_state.name == "StateBoardEatSquare"
 	var next_square : Square = statemachine.get_next_square(
 		statemachine.last_dropoff_square)
 	var square_after_next : Square = statemachine.get_next_square(
 		next_square)
-	if (next_square.rock_pile.rocks_count() > 0 and has_not_eaten):
+	if next_square.is_empty() and square_after_next.is_empty():
+		end_turn()
+	elif next_square is BigSquare and not next_square.is_empty():
+		end_turn()
+	elif next_square is Square and not next_square.is_empty() and not is_eating_square:
 		next_square.rock_pile.pick_up()
 		statemachine.selected_square = next_square
 		statemachine.first_dropoff_square = square_after_next
 		statemachine.change_to_state("StateBoardPutRocks")
+	elif next_square.is_empty() and not square_after_next.is_empty():
+		statemachine.eaten_square = square_after_next
+		statemachine.empty_square_to_tap = next_square
+		statemachine.change_to_state("StateBoardEatSquare")
 	else:
-		if (next_square.is_empty() and not square_after_next.is_empty()):
-			statemachine.eaten_square = square_after_next
-			statemachine.empty_square_to_tap = next_square
-			statemachine.change_to_state("StateBoardEatSquare")
-		else:
-			statemachine.board.turn_started.connect(on_turn_started)
-			statemachine.board.turn_ended.emit()
+		end_turn()
+
+func end_turn() -> void:
+	statemachine.board.turn_started.connect(on_turn_started)
+	statemachine.board.turn_ended.emit()
 
 func is_game_ended() -> bool:
 	var board: Board = statemachine.board
