@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://dqmfeshh1gjkn"]
+[gd_scene load_steps=9 format=4 uid="uid://dqmfeshh1gjkn"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_xemcm"]
 [ext_resource type="PackedScene" uid="uid://b3nupaf0mqq2f" path="res://scenes/rockpile.tscn" id="2_pxo3o"]
 [ext_resource type="PackedScene" uid="uid://bokk4rl37lv1t" path="res://scenes/board.tscn" id="3_jje64"]
 [ext_resource type="Texture2D" uid="uid://cfe6x88arsw4j" path="res://assets/BackgroundTile.png" id="3_scyab"]
 [ext_resource type="Script" path="res://scripts/player_rock_pile.gd" id="4_55c4l"]
+[ext_resource type="FontFile" uid="uid://b0w2x2tmaaesu" path="res://assets/monogram.ttf" id="6_7svse"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7bbiu"]
 texture = ExtResource("3_scyab")
@@ -29,3 +30,14 @@ board = NodePath("../Board")
 
 [node name="RockPile" parent="PlayerRockPile" instance=ExtResource("2_pxo3o")]
 position = Vector2(560, 448)
+
+[node name="Label" type="Label" parent="PlayerRockPile"]
+texture_filter = 1
+offset_left = 320.0
+offset_top = 400.0
+offset_right = 392.0
+offset_bottom = 423.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_7svse")
+theme_override_font_sizes/font_size = 24
+text = "Count: 0"

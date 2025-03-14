@@ -1,6 +1,7 @@
 extends Node
 
 @onready var rock_pile : RockPile = $"RockPile"
+@onready var count_label : Label = $"Label"
 @export var board: Board
 
 func _ready() -> void:
@@ -9,4 +10,5 @@ func _ready() -> void:
 	
 func on_square_eaten(square: Square) -> void:
 	rock_pile.add_rocks(square.rock_pile.rocks())
+	count_label.text = "Count: " + str(rock_pile.rocks_count())
 	square.eat()
