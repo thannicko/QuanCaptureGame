@@ -7,7 +7,7 @@ var picked_up: bool = false
 var container_size: Vector2
 var max_rocks_in_row: int
 var _position_when_picked_up: Vector2 = Vector2.ZERO
-var _rocks: Array[Node2D]
+var _rocks: Array[Rock]
 
 func _ready() -> void:
 	_rocks.clear()
@@ -23,6 +23,13 @@ func is_empty() -> bool:
 	
 func rocks_count() -> int:
 	return _rocks.size()
+	
+func score() -> int:
+	var score = 0
+	for rock in _rocks:
+		score += rock.score
+	return score
+		
 
 func pick_up() -> void:
 	_position_when_picked_up = position
@@ -45,11 +52,11 @@ func add_rock(rock : Node2D) -> void:
 	_rocks.append(rock)
 	_set_rock_position(rock, _rocks.find(rock))
 
-func add_rocks(rocks : Array[Node2D]) -> void:
+func add_rocks(rocks : Array[Rock]) -> void:
 	for rock in rocks:
 		add_rock(rock)
 
-func rocks() -> Array[Node2D]:
+func rocks() -> Array[Rock]:
 	return _rocks
 
 func clear() -> void:

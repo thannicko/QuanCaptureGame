@@ -2,6 +2,12 @@ class_name StateBoardCheckTurnEnd extends State
 
 func entry() -> void:
 	print("Entered: check turn end")
+	if (is_game_ended()):
+		statemachine.change_to_state("StateBoardGameEnded")
+	else:
+		continue_game()
+
+func continue_game() -> void:
 	var has_not_eaten = statemachine.previous_state.name != "StateBoardEatSquare"
 	var next_square : Square = statemachine.get_next_square(
 		statemachine.last_dropoff_square)
@@ -20,6 +26,12 @@ func entry() -> void:
 		else:
 			statemachine.board.turn_started.connect(on_turn_started)
 			statemachine.board.turn_ended.emit()
+
+func is_game_ended() -> bool:
+	var board: Board = statemachine.board
+	var first_big_square = board.squares[0]
+	var last_big_square = board.squares[board.NumberOfPlayerSquares + 1]
+	return first_big_square.is_empty() and last_big_square.is_empty()
 	
 func on_turn_started(player_index : int) -> void:
 	statemachine.allowed_row_index = player_index

@@ -3,6 +3,7 @@ class_name Board extends Node2D
 signal square_eaten(player_index: int, square: Square)
 signal turn_started(player_index: int)
 signal turn_ended()
+signal game_ended()
 
 const NumberOfSquares : int  = 12
 const NumberOfPlayerSquares : int  = 5

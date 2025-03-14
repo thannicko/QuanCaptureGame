@@ -12,5 +12,5 @@ func _ready() -> void:
 func on_square_eaten(index: int, square: Square) -> void:
 	if (index == player_index):
 		rock_pile.add_rocks(square.rock_pile.rocks())
-		count_label.text = "Count: " + str(rock_pile.rocks_count())
+		count_label.text = "Score: " + str(rock_pile.score())
 		square.eat()

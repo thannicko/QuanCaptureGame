@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardputrocks.gd" id="6_ylfhq"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardcheckturnend.gd" id="8_if1vu"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardeatsquare.gd" id="9_j1vey"]
-[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardturnended.gd" id="11_dgrll"]
+[ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardgameended.gd" id="11_dgrll"]
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_1u8pc")
@@ -73,5 +73,5 @@ script = ExtResource("8_if1vu")
 [node name="StateBoardEatSquare" type="Node" parent="StateMachine"]
 script = ExtResource("9_j1vey")
 
-[node name="StateBoardTurnEnded" type="Node" parent="StateMachine"]
+[node name="StateBoardGameEnded" type="Node" parent="StateMachine"]
 script = ExtResource("11_dgrll")
