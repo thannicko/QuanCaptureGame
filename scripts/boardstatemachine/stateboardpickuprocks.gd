@@ -8,18 +8,21 @@ func entry() -> void:
 		var square = square_node as Square
 		square.square_clicked.connect(on_square_clicked.bind(square))
 		square.enable()
+
+func check_all_squares_empty() -> void:
+	pass
 		
 func on_square_clicked(square: Square) -> void:
 	if (statemachine.selected_square == null):
 		if (square is BigSquare):
-			print("Only allowed to pick up player squares!")
+			GlobalPrompter.prompt("Picking up the big square is not allowed!")
 		elif (statemachine.board.get_row_index(square) != statemachine.allowed_row_index):
-			print("Only allowed to pick up from your own squares!")
+			GlobalPrompter.prompt("Only allowed to pick up from your own squares!")
 		elif (not square.rock_pile.is_empty()):
 			square.rock_pile.pick_up()
 			statemachine.selected_square = square
 		else:
-			print("Square empty!")
+			GlobalPrompter.prompt("Square empty!")
 	else:
 		if (square == statemachine.selected_square):
 			square.rock_pile.put_down()
@@ -30,7 +33,7 @@ func on_square_clicked(square: Square) -> void:
 			_determine_selected_direction()
 			statemachine.change_to_state("StateBoardPutRocks")
 		else:
-			print("Too far away")
+			GlobalPrompter.prompt("Rock should be dropped to adjacent squares!")
 
 func _determine_selected_direction() -> void:
 	statemachine.put_direction = statemachine.determine_direction(

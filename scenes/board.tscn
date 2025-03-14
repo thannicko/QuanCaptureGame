@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bokk4rl37lv1t"]
+[gd_scene load_steps=13 format=3 uid="uid://bokk4rl37lv1t"]
 
 [ext_resource type="Script" path="res://scripts/board.gd" id="1_1u8pc"]
 [ext_resource type="PackedScene" uid="uid://c2v6rliyxr2fx" path="res://scenes/squarebig.tscn" id="2_8cufc"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/boardstatemachine.gd" id="3_wqgbh"]
 [ext_resource type="PackedScene" uid="uid://birtrmdefmuj8" path="res://scenes/square.tscn" id="3_yivyq"]
+[ext_resource type="Texture2D" uid="uid://bab26w4lukqeq" path="res://assets/ExclamationMark.png" id="4_1iw0y"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardidle.gd" id="4_ca7tb"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardsetup.gd" id="5_lvog4"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardpickuprocks.gd" id="6_crh73"]
@@ -51,6 +52,14 @@ position = Vector2(400, 80)
 position = Vector2(560, 160)
 rotation = 3.14159
 
+[node name="ExclamationMark" type="Sprite2D" parent="."]
+visible = false
+z_index = 10
+texture_filter = 1
+position = Vector2(360, 120)
+scale = Vector2(2.75, 2.75)
+texture = ExtResource("4_1iw0y")
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("board")]
 script = ExtResource("3_wqgbh")
 board = NodePath("..")
@@ -70,8 +79,9 @@ script = ExtResource("6_ylfhq")
 [node name="StateBoardCheckTurnEnd" type="Node" parent="StateMachine"]
 script = ExtResource("8_if1vu")
 
-[node name="StateBoardEatSquare" type="Node" parent="StateMachine"]
+[node name="StateBoardEatSquare" type="Node" parent="StateMachine" node_paths=PackedStringArray("exclamation_mark")]
 script = ExtResource("9_j1vey")
+exclamation_mark = NodePath("../../ExclamationMark")
 
 [node name="StateBoardGameEnded" type="Node" parent="StateMachine"]
 script = ExtResource("11_dgrll")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dqmfeshh1gjkn"]
+[gd_scene load_steps=14 format=4 uid="uid://dqmfeshh1gjkn"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_xemcm"]
 [ext_resource type="PackedScene" uid="uid://b3nupaf0mqq2f" path="res://scenes/rockpile.tscn" id="2_pxo3o"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/turnstatemachine/stateturncheckplayer.gd" id="8_8a13q"]
 [ext_resource type="Script" path="res://scripts/turnstatemachine/stateturnplayer.gd" id="8_krinu"]
 [ext_resource type="Script" path="res://scripts/turnstatemachine/stateturnnpc.gd" id="10_qe6hr"]
+[ext_resource type="Script" path="res://scripts/promptlabel.gd" id="11_emnt8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7bbiu"]
 texture = ExtResource("3_scyab")
@@ -86,13 +87,14 @@ texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 552.0
+offset_left = 501.5
 offset_top = 24.0
-offset_right = 624.0
-offset_bottom = 47.0
+offset_right = 674.5
+offset_bottom = 58.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_7svse")
 theme_override_font_sizes/font_size = 42
 text = "Game prompt"
 horizontal_alignment = 1
+script = ExtResource("11_emnt8")

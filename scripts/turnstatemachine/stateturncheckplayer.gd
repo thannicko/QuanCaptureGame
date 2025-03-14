@@ -15,4 +15,5 @@ func entry() -> void:
 		else:
 			# Switch to the other human player
 			statemachine.change_to_state("StateTurnPlayer")
+	GlobalPrompter.prompt("New turn begins for player of row " + str(statemachine.active_row_index + 1))
 			
