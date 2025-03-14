@@ -10,6 +10,7 @@ func entry() -> void:
 		square.enable()
 
 func check_all_squares_empty() -> void:
+	#TODO: Add take 5 of own stash if empty.
 	pass
 		
 func on_square_clicked(square: Square) -> void:
