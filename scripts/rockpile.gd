@@ -67,6 +67,8 @@ func _set_rock_position(rock: Node2D, index: int) -> void:
 	rock.position.x = (index % max_rocks_in_row) * RockSize
 	rock.position.x += randi_range(0, 10)
 	rock.position.y = (index / max_rocks_in_row) * RockSize
+	rock.position.x = min(rock.position.x, container_size.x)
+	rock.position.y = min(rock.position.y, container_size.y)
 		
 func _add_rock_to_scene(rock: Node2D):
 	var random_scale = randf_range(0.85, 1.25)

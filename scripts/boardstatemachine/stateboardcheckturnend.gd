@@ -2,11 +2,12 @@ class_name StateBoardCheckTurnEnd extends State
 
 func entry() -> void:
 	print("Entered: check turn end")
+	var has_not_eaten = statemachine.previous_state.name != "StateBoardEatSquare"
 	var next_square : Square = statemachine.get_next_square(
 		statemachine.last_dropoff_square)
 	var square_after_next : Square = statemachine.get_next_square(
 		next_square)
-	if (next_square.rock_pile.rocks_count() > 0):
+	if (next_square.rock_pile.rocks_count() > 0 and has_not_eaten):
 		next_square.rock_pile.pick_up()
 		statemachine.selected_square = next_square
 		statemachine.first_dropoff_square = square_after_next
