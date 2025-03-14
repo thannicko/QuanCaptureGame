@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bokk4rl37lv1t"]
+[gd_scene load_steps=11 format=3 uid="uid://bokk4rl37lv1t"]
 
 [ext_resource type="Script" path="res://scripts/board.gd" id="1_1u8pc"]
 [ext_resource type="PackedScene" uid="uid://c2v6rliyxr2fx" path="res://scenes/squarebig.tscn" id="2_8cufc"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/boardstatemachine.gd" id="3_wqgbh"]
+[ext_resource type="PackedScene" uid="uid://birtrmdefmuj8" path="res://scenes/square.tscn" id="3_yivyq"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardidle.gd" id="4_ca7tb"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardsetup.gd" id="5_lvog4"]
 [ext_resource type="Script" path="res://scripts/boardstatemachine/stateboardpickuprocks.gd" id="6_crh73"]
@@ -14,6 +15,40 @@
 script = ExtResource("1_1u8pc")
 
 [node name="SquareBig" parent="." instance=ExtResource("2_8cufc")]
+
+[node name="Square" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(80, 0)
+
+[node name="Square2" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(160, 0)
+
+[node name="Square3" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(240, 0)
+
+[node name="Square4" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(320, 0)
+
+[node name="Square5" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(400, 0)
+
+[node name="Square6" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(80, 80)
+
+[node name="Square7" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(160, 80)
+
+[node name="Square8" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(240, 80)
+
+[node name="Square9" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(320, 80)
+
+[node name="Square10" parent="." instance=ExtResource("3_yivyq")]
+position = Vector2(400, 80)
+
+[node name="SquareBig2" parent="." instance=ExtResource("2_8cufc")]
+position = Vector2(560, 160)
+rotation = 3.14159
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("board")]
 script = ExtResource("3_wqgbh")

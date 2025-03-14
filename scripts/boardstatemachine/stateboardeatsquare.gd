@@ -11,9 +11,9 @@ func on_empty_square_tapped() -> void:
 	statemachine.eaten_square.enable()
 	
 func on_square_eaten() -> void:
-	statemachine.eaten_square.eat()
 	statemachine.eaten_square.disable()
 	statemachine.last_dropoff_square = statemachine.eaten_square
+	statemachine.board.square_eaten.emit(statemachine.eaten_square)
 	statemachine.change_to_state("StateBoardCheckTurnEnd") # Check for stacking
 	print("Square eaten: ", statemachine.eaten_square)
 

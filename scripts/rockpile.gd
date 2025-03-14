@@ -45,6 +45,13 @@ func add_rock(rock : Node2D) -> void:
 	_rocks.append(rock)
 	_set_rock_position(rock, _rocks.find(rock))
 
+func add_rocks(rocks : Array[Node2D]) -> void:
+	for rock in rocks:
+		add_rock(rock)
+
+func rocks() -> Array[Node2D]:
+	return _rocks
+
 func clear() -> void:
 	_rocks.clear()
 	for child in get_children():
