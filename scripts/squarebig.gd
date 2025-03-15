@@ -1,6 +1,7 @@
 class_name BigSquare extends Square
 
 @onready var sprite : Node2D = $Sprite
+@onready var pile_origin: Marker2D = $Marker2D
 
 const LeftFacingFirstHalfRotation : int = 90
 const LeftFacingSecondHalfRotation : int = 180
@@ -24,5 +25,6 @@ func face_left() -> void:
 	
 func face_right() -> void:
 	sprite.rotation_degrees = 0
+	pile_origin.position.x += 4
 	rock_pile.scale.x *= -1
 	disabled_square.rotation_degrees = sprite.rotation_degrees

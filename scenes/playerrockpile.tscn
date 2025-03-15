@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxunmbcwrv445"]
+
+[ext_resource type="Script" path="res://scripts/playerrockpile.gd" id="1_cih2k"]
+[ext_resource type="PackedScene" uid="uid://b3nupaf0mqq2f" path="res://scenes/rockpile.tscn" id="2_n03qw"]
+[ext_resource type="FontFile" uid="uid://b0w2x2tmaaesu" path="res://assets/monogram.ttf" id="3_cgdag"]
+
+[node name="PlayerRockPile" type="Node2D"]
+script = ExtResource("1_cih2k")
+player_index = 1
+
+[node name="RockPile" parent="." instance=ExtResource("2_n03qw")]
+position = Vector2(248, 40)
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_right = 72.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_cgdag")
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
