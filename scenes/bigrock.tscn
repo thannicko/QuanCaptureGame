@@ -7,11 +7,13 @@
 radius = 17.72
 
 [node name="BigRock" type="Node2D"]
+z_index = 15
 script = ExtResource("1_xgb2t")
 rock_textures = Array[Texture2D]([ExtResource("2_fnhts")])
 score = 10
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(18, 12.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(0.926136, -0.7246)
@@ -19,4 +21,5 @@ shape = SubResource("CircleShape2D_l2bjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(18, 12.5)
 texture = ExtResource("2_fnhts")

@@ -7,13 +7,14 @@ func entry() -> void:
 	exclamation_mark.hide()
 	exclamation_mark.reparent(statemachine.empty_square_to_tap)
 	exclamation_mark.position = Vector2(8, 8)
+	if (statemachine.empty_square_to_tap is BigSquare):
+		exclamation_mark.position.y += 8
 	exclamation_mark.show()
 	statemachine.empty_square_to_tap.enable()
 	statemachine.empty_square_to_tap.square_clicked.connect(on_empty_square_tapped)
 	statemachine.eaten_square.square_clicked.connect(on_square_eaten)
 	
 func on_empty_square_tapped() -> void:
-	statemachine.empty_square_to_tap.disable()
 	statemachine.eaten_square.enable()
 	exclamation_mark.hide()
 	

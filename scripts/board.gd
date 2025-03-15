@@ -4,6 +4,7 @@ signal square_eaten(player_index: int, square: Square)
 signal turn_started(player_index: int)
 signal turn_ended()
 signal game_ended()
+signal borrowed_from_stash(player_index: int, amount: int)
 
 const NumberOfSquares : int  = 12
 const NumberOfPlayerSquares : int  = 5
@@ -26,6 +27,13 @@ func get_row_index(square: Square) -> int:
 	elif (index > NumberOfPlayerSquares + 1 and index < NumberOfSquares):
 		return 1
 	return -1
+
+func get_all_squares_in_row(row_index: int) -> Array[Square]:
+	var result : Array[Square] = []
+	for i in range(0, NumberOfSquares):
+		if (get_row_index(squares[i]) == row_index):
+			result.append(squares[i])
+	return result
 
 func _spawn_board():
 	squares.clear()

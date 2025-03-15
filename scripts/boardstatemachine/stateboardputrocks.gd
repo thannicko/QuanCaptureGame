@@ -36,7 +36,6 @@ func _drop_rock_at(destination: Square) -> void:
 	if (statemachine.selected_square.rock_pile.rocks_count() > 0):
 		var rock = statemachine.selected_square.rock_pile.pop_front()
 		destination.rock_pile.add_rock(rock)
-		destination.disable()
 		_square_path.erase(destination)
 		statemachine.last_dropoff_square = destination
 		_check_path_empty()

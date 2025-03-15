@@ -13,10 +13,12 @@ script = ExtResource("1_7w73s")
 rock_textures = Array[Texture2D]([ExtResource("3_ibmlo"), ExtResource("1_0auhv"), ExtResource("4_udb54")])
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(9, 9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_l2bjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(9, 9)
 texture = ExtResource("1_0auhv")

@@ -15,7 +15,7 @@ var _is_mouse_on_square: bool = false
 func _ready() -> void:
 	area2d.mouse_entered.connect(_on_mouse_entered_square)
 	area2d.mouse_exited.connect(_on_mouse_exited_square)
-	rock_pile.set_container_size(get_size())
+	rock_pile.set_container_size(global_position, get_size())
 	disabled_square.hide()
 
 func is_empty() -> bool:

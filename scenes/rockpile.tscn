@@ -1,23 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3nupaf0mqq2f"]
+[gd_scene load_steps=4 format=3 uid="uid://b3nupaf0mqq2f"]
 
 [ext_resource type="Script" path="res://scripts/rockpile.gd" id="1_ixije"]
 [ext_resource type="PackedScene" uid="uid://do5ciu7ykx32p" path="res://scenes/rock.tscn" id="1_jbstt"]
+[ext_resource type="PackedScene" uid="uid://cdwe6kexy05uu" path="res://scenes/bigrock.tscn" id="2_el74c"]
 
 [node name="Rockpile" type="Node2D"]
 z_index = 5
 script = ExtResource("1_ixije")
 
+[node name="BigRock" parent="." instance=ExtResource("2_el74c")]
+
 [node name="Rock" parent="." instance=ExtResource("1_jbstt")]
-position = Vector2(8, 8)
+position = Vector2(32, 0)
 
 [node name="Rock2" parent="." instance=ExtResource("1_jbstt")]
-position = Vector2(24, 8)
-
-[node name="Rock3" parent="." instance=ExtResource("1_jbstt")]
-position = Vector2(24, 24)
-
-[node name="Rock4" parent="." instance=ExtResource("1_jbstt")]
-position = Vector2(8, 24)
-
-[node name="Rock5" parent="." instance=ExtResource("1_jbstt")]
-position = Vector2(40, 8)
+position = Vector2(48, 0)

@@ -1,22 +1,28 @@
 class_name RockPile extends Node2D
 
+@export var pileorigin: Marker2D
+
 const RockSize: int = 16
 const RockScene: PackedScene = preload("res://scenes/rock.tscn")
 const BigRockScene: PackedScene = preload("res://scenes/bigrock.tscn")
 var picked_up: bool = false
-var container_size: Vector2
+var _container_global_position: Vector2
+var _max_global_position: Vector2
 var max_rocks_in_row: int
 var _position_when_picked_up: Vector2 = Vector2.ZERO
 var _rocks: Array[Rock]
+var _starting_position: Vector2
 
 func _ready() -> void:
+	_starting_position = global_position
 	_rocks.clear()
 	for child in get_children():
 		child.queue_free()
 
-func set_container_size(size: Vector2) -> void:
-	container_size = size - Vector2(30, 30)
-	max_rocks_in_row = container_size.x / RockSize
+func set_container_size(global_pos: Vector2, size: Vector2) -> void:
+	_container_global_position = global_pos + Vector2(8, 8)
+	_max_global_position = _container_global_position + size
+	max_rocks_in_row = (size.x - RockSize) / RockSize
 	
 func is_empty() -> bool:
 	return rocks_count() <= 0
@@ -46,15 +52,37 @@ func _process(delta: float) -> void:
 func pop_front() -> Node2D:
 	return _rocks.pop_front()
 
-func add_rock(rock : Node2D) -> void:
+func add_rock(rock : Rock) -> void:
 	picked_up = false
-	rock.reparent(self)
-	_rocks.append(rock)
-	_set_rock_position(rock, _rocks.find(rock))
+	var new_rock = duplicate_rock(rock)
+	add_child(new_rock)
+	_rocks.append(new_rock)
+	_set_rock_position(new_rock, _rocks.find(new_rock))
+	rock.queue_free()
+
+func duplicate_rock(rock: Rock) -> Rock:
+	var new_rock: Rock
+	if (rock is Rock):
+		new_rock = RockScene.instantiate() as Rock
+	elif (rock is BigRock):
+		new_rock = BigRockScene.instantiate() as BigRock
+	new_rock.set_texture(rock.sprite.texture)
+	return new_rock
 
 func add_rocks(rocks : Array[Rock]) -> void:
 	for rock in rocks:
 		add_rock(rock)
+
+func remove_rocks(amount: int) -> void:
+	var count: int = 0
+	for rock in _rocks:
+		if count == amount:
+			break
+		if rock is BigRock:
+			continue
+		rock.queue_free()
+		_rocks.erase(rock)
+		count += 1
 
 func rocks() -> Array[Rock]:
 	return _rocks
@@ -78,11 +106,13 @@ func _set_rocks(scene: PackedScene, amount : int) -> void:
 		_set_rock_position(rock, i)
 		
 func _set_rock_position(rock: Node2D, index: int) -> void:
-	rock.position.x = (index % max_rocks_in_row) * RockSize
-	rock.position.x += randi_range(0, 10)
-	rock.position.y = (index / max_rocks_in_row) * RockSize
-	rock.position.x = min(rock.position.x, container_size.x)
-	rock.position.y = min(rock.position.y, container_size.y)
+	if (pileorigin != null):
+		position = pileorigin.position
+	rock.global_position.x += (index % max_rocks_in_row) * RockSize
+	rock.global_position.y += (index / max_rocks_in_row) * RockSize
+	rock.global_position.x = min(rock.global_position.x, _max_global_position.x)
+	rock.global_position.y = min(rock.global_position.y, _max_global_position.y)
+	print("Set rock position: ", rock, index, " -> ", rock.global_position, " vs origin: ", global_position)
 		
 func _add_rock_to_scene(rock: Node2D):
 	var random_scale = randf_range(0.85, 1.25)

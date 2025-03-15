@@ -12,6 +12,10 @@ size = Vector2(16, 32)
 scale = Vector2(5, 5)
 script = ExtResource("1_emkf0")
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(4.4, 14.6)
+scale = Vector2(1, 1)
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(8, 8)
 
@@ -47,6 +51,7 @@ position = Vector2(0, 8)
 texture = ExtResource("3_o7wp7")
 flip_v = true
 
-[node name="Rockpile" parent="." instance=ExtResource("3_g1rkm")]
-position = Vector2(5.2, 13.4)
+[node name="Rockpile" parent="." node_paths=PackedStringArray("pileorigin") instance=ExtResource("3_g1rkm")]
+position = Vector2(3.2, 12.8)
 scale = Vector2(0.167, 0.167)
+pileorigin = NodePath("../Marker2D")

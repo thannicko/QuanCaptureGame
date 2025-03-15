@@ -5,6 +5,7 @@ func entry() -> void:
 	for square_node in statemachine.board.squares:
 		var square = square_node as Square
 		square.set_process_input(false)
+		square.rock_pile.set_container_size(square.global_position, square.get_size())
 		if (square is BigSquare):
 			square.rock_pile.set_big_rocks(statemachine.NumberOfStartingRocksBigSquare)
 		else:
