@@ -4,6 +4,7 @@ class_name BoardStateMachine extends StateMachine
 
 enum PutRocksDirection { Clockwise, Anticlockwise }
 
+var paused: bool
 var allowed_row_index: int
 var selected_square: Square
 var first_dropoff_square: Square
@@ -14,6 +15,14 @@ var put_direction: PutRocksDirection
 
 const NumberOfStartingRocksBigSquare : int = 1
 const NumberOfStartingRocks : int = 5
+
+func _ready() -> void:
+	super._ready()
+	board.paused.connect(on_board_paused)
+	
+func on_board_paused(is_paused: bool) -> void:
+	paused = is_paused
+	
 
 func get_next_square(target: Square) -> Square:
 	var next_square = target.anticlockwise_neighbor

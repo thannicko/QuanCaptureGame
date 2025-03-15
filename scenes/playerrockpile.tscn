@@ -9,7 +9,7 @@ script = ExtResource("1_cih2k")
 player_index = 1
 
 [node name="RockPile" parent="." instance=ExtResource("2_n03qw")]
-position = Vector2(248, 40)
+position = Vector2(48, 40)
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1

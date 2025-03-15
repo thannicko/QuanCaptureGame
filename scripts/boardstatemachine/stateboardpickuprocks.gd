@@ -34,12 +34,15 @@ func refill_squares() -> void:
 		board.NumberOfPlayerSquares)
 		
 func on_square_clicked(square: Square) -> void:
+	if statemachine.paused:
+		return
 	if (statemachine.selected_square == null):
 		if (square is BigSquare):
 			GlobalPrompter.prompt("Picking up the big square is not allowed!")
 		elif (not allowed_squares.has(square)):
 			GlobalPrompter.prompt("Only allowed to pick up from your own squares!")
 		elif (not square.rock_pile.is_empty()):
+			statemachine.board.picked_up_rock.emit()
 			square.rock_pile.pick_up()
 			statemachine.selected_square = square
 		else:
