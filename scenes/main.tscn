@@ -46,7 +46,7 @@ offset_bottom = 423.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_7svse")
 theme_override_font_sizes/font_size = 24
-text = "Count: 0"
+text = "Score: 0"
 
 [node name="OtherRockPile" type="Node" parent="." node_paths=PackedStringArray("board")]
 script = ExtResource("4_mb1lo")
@@ -66,7 +66,7 @@ offset_bottom = 215.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_7svse")
 theme_override_font_sizes/font_size = 24
-text = "Count: 0"
+text = "Score: 0"
 
 [node name="TurnStateMachine" type="Node" parent="." node_paths=PackedStringArray("board")]
 script = ExtResource("7_dv7pw")
@@ -81,20 +81,35 @@ script = ExtResource("8_krinu")
 [node name="StateTurnNpc" type="Node" parent="TurnStateMachine"]
 script = ExtResource("10_qe6hr")
 
-[node name="PromptLabel" type="Label" parent="."]
-visible = false
+[node name="Title" type="Label" parent="."]
 texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 501.5
+offset_left = 304.5
 offset_top = 24.0
-offset_right = 674.5
+offset_right = 871.5
 offset_bottom = 58.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_7svse")
 theme_override_font_sizes/font_size = 42
-text = "Game prompt"
+text = "QUAN CAPTURE"
+horizontal_alignment = 1
+
+[node name="PromptLabel" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 304.5
+offset_top = 56.0
+offset_right = 871.5
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_7svse")
+theme_override_font_sizes/font_size = 36
+text = "Player at row 2 begins"
 horizontal_alignment = 1
 script = ExtResource("11_emnt8")
