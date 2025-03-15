@@ -14,7 +14,7 @@ config/name="Quan Game"
 config/description="Ô ăn quan, a traditional Vietnamese folk game."
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://assets/BigRock.png"
+config/icon="res://assets/RockWithOutline.png"
 
 [autoload]
 
